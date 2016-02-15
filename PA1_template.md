@@ -58,7 +58,9 @@ medianSteps <- as.integer(median(stepsPerDay$steps))
 ### Histogram of the total steps per day
 
 ```r
-hist(stepsPerDay$steps, col = "green", xlab = "Total Steps", main = "Histogram of Total Steps Per Day")
+hist(stepsPerDay$steps, col = "green", xlab = "Total Steps", 
+     main = "Histogram of Total Steps Per Day")
+
 rug(stepsPerDay$steps, col = "blue")
 ```
 
@@ -79,7 +81,9 @@ Interval <-IvlWithHighest[[1,1]]
 AverageSteps <- as.integer(IvlWithHighest[[1,2]])
 
 ggplot(aes(x=Interval, y=AverageSteps), data=avgByInterval)+geom_line()+
-        xlab("Interval")+ylab("Average Steps")+ggtitle("Average Steps per Interval")+theme_linedraw()
+        xlab("Interval")+ylab("Average Steps")+
+        ggtitle("Average Steps per Interval")+
+        theme_linedraw()
 ```
 
 ![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)
