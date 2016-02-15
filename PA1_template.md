@@ -16,7 +16,7 @@ Note you may need to install the ggplot2 package before knitting this file
 library(ggplot2)
 ```
 
-### pre-process the data
+### Pre-process the data
 This code will unzip the data set extracting a csv file.
 The csv "activities.csv" contains measurement of the number of steps taken in 5 minute intervals throught a period of 2 months in 2012. In this project we will perform some basic analysis of that data set.
 Once the csv is extracted we read it into a data frame, then add additional dimensional information including whether the measurement day is a weekday or weekend.
@@ -43,28 +43,27 @@ activities$steps <- as.numeric(activities$steps)
 
 
 ## What is mean total number of steps taken per day?
-First we aggregate the number of steps taken per day, then show the mean and median of steps taken.
+This code aggregates the number of steps taken per day using the sum function. Then plots a histogram.
+
+
+
 
 
 ```r
 stepsPerDay <- aggregate(steps~date,data=activities ,FUN ="sum")
 meanSteps <- as.integer(mean(stepsPerDay$steps))
 medianSteps <- as.integer(median(stepsPerDay$steps))
-```
-#### Mean of steps per day: 10766
-#### Median of steps per day: 10765
-
-
-### Histogram of the total steps per day
-
-```r
 hist(stepsPerDay$steps, col = "green", xlab = "Total Steps", 
      main = "Histogram of Total Steps Per Day")
 
 rug(stepsPerDay$steps, col = "blue")
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
+
+Mean of steps per day: 10766 
+
+Median of steps per day: 10765 
 
 
 ## What is the average daily activity pattern?
@@ -86,10 +85,11 @@ ggplot(aes(x=Interval, y=AverageSteps), data=avgByInterval)+geom_line()+
         theme_linedraw()
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
 
-#### Interval 835 has the highest average number of steps.
-#### Average steps during that interval : 206
+Interval 835 has the highest average number of steps. 
+Average steps during that interval : 206
+
 
 ## Imputing missing values
 #### Imputing will be done by replacing values for a given interval with the mean for that interval
@@ -119,7 +119,7 @@ hist(stepsPerDay$steps, col = "green", xlab = "Total Steps", main = "Histogram o
 rug(stepsPerDay$steps, col = "blue")
 ```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png)
+![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png)
 
 ## Are there differences in activity patterns between weekdays and weekends?
 ### This section uses the Weekday type attribute added to the data set during pre-processing
@@ -133,7 +133,7 @@ ggplot(aes(x=interval, y = steps), data=WeekDayvsWeekend) +
         ggtitle("Average steps by 5 Minute Interval Weekdays vs. Weekend")
 ```
 
-![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)
+![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png)
 
 The graphs shows the difference in activity level measured in steps - weekdays show a high level of activity early on followed by low activity levels for the remainder of the day. Weekends show a more sustained level activity throught the day, with the first high level activity starting later than during weekdays.
 

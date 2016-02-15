@@ -15,7 +15,7 @@ Note you may need to install the ggplot2 package before knitting this file
 library(ggplot2)
 ```
 
-### pre-process the data
+### Pre-process the data
 This code will unzip the data set extracting a csv file.
 The csv "activities.csv" contains measurement of the number of steps taken in 5 minute intervals throught a period of 2 months in 2012. In this project we will perform some basic analysis of that data set.
 Once the csv is extracted we read it into a data frame, then add additional dimensional information including whether the measurement day is a weekday or weekend.
@@ -42,25 +42,24 @@ activities$steps <- as.numeric(activities$steps)
 
 
 ## What is mean total number of steps taken per day?
-First we aggregate the number of steps taken per day, then show the mean and median of steps taken.
+This code aggregates the number of steps taken per day using the sum function. Then plots a histogram.
 
-```{r}
+
+
+
+```{r fig.width= 7.5 }
 stepsPerDay <- aggregate(steps~date,data=activities ,FUN ="sum")
 meanSteps <- as.integer(mean(stepsPerDay$steps))
 medianSteps <- as.integer(median(stepsPerDay$steps))
-
-```
-#### Mean of steps per day: `r meanSteps`
-#### Median of steps per day: `r medianSteps`
-
-
-### Histogram of the total steps per day
-```{r fig.width= 7.5 }
 hist(stepsPerDay$steps, col = "green", xlab = "Total Steps", 
      main = "Histogram of Total Steps Per Day")
 
 rug(stepsPerDay$steps, col = "blue")
 ```
+
+Mean of steps per day: `r meanSteps` 
+
+Median of steps per day: `r medianSteps` 
 
 
 ## What is the average daily activity pattern?
@@ -82,8 +81,9 @@ ggplot(aes(x=Interval, y=AverageSteps), data=avgByInterval)+geom_line()+
 
 ```
 
-#### Interval `r Interval ` has the highest average number of steps.
-#### Average steps during that interval : `r AverageSteps`
+Interval `r Interval ` has the highest average number of steps. 
+Average steps during that interval : `r AverageSteps`
+
 
 ## Imputing missing values
 #### Imputing will be done by replacing values for a given interval with the mean for that interval
